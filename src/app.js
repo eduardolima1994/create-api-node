@@ -1,7 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const router = express.Router();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 const route = router.get("/", (req, res, bext) => {
     res.status(200).send({
@@ -10,6 +15,11 @@ const route = router.get("/", (req, res, bext) => {
     });
 });
 
+const create = router.post("/", (req, res, bext) => {
+    res.status(201).json(req.body);
+});
+
 app.use("/", route);
+app.use("/products", create);
 
 module.exports = app;
