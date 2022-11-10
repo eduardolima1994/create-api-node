@@ -43,3 +43,7 @@ exports.update = (id, data) => {
       },
   });
 }
+
+exports.delete = (id) => { 
+  return Product.findByIdAndRemove(id);
+}

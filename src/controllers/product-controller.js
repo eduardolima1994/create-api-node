@@ -85,7 +85,7 @@ exports.put = (req, res, next) => {
 };
 
 exports.delete = (req, res, next) => {
-    Product.findByIdAndRemove(req.body.id)
+    repository.delete(req.body.id)
         .then(x => {
             res.status(201).send({
                 message: "Produto removido com sucesso!",
