@@ -27,3 +27,19 @@ exports.getByTag = (tag) => {
       "title description price slug tags"
   );
 }
+
+exports.create = (data) => {
+  let product = new Product(data);
+  return product.save();
+}
+
+exports.update = (id, data) => { 
+  return Product.findByIdAndUpdate(id, {
+      $set: {
+          title: data.title,
+          description: data.description,
+          price: data.price,
+          slug: data.slug,
+      },
+  });
+}
