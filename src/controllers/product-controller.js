@@ -34,7 +34,7 @@ exports.getById = (req, res, next) => {
 };
 
 exports.getByTag = (req, res, next) => {
-    description.getByTag(req.params.tag)
+    repository.getByTag(req.params.tag)
         .then((data) => {
             res.status(200).send(data);
         })
