@@ -70,8 +70,7 @@ exports.post = (req, res, next) => {
 };
 
 exports.put = (req, res, next) => {
-    repository
-        .update(req.body.id, req.body)
+    repository.update(req.params.id, req.body)
         .then(x => {
         res.status(201).send({
             message: "Produto atualizado com sucesso!",

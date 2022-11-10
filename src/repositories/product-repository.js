@@ -38,8 +38,8 @@ exports.update = (id, data) => {
       $set: {
           title: data.title,
           description: data.description,
-          price: data.price,
           slug: data.slug,
+          price: data.price,
       },
   });
 }
