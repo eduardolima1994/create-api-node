@@ -47,7 +47,7 @@ exports.getByTag = async (req, res, next) => {
     }
 };
 
-exports.post = (req, res, next) => {
+exports.post = async (req, res, next) => {
     let contract = new ValidationContract();
     contract.hasMinLen(req.body.title, 3, 'O título deve conter pelo menos 3 caracteres.');
     contract.hasMinLen(req.body.slug, 3, 'O slug deve conter pelo menos 3 caracteres.');
@@ -58,19 +58,16 @@ exports.post = (req, res, next) => {
         return;
     }
 
-    repository
-        .create(req.body)
-        .then((x) => {
-            res.status(201).send({
-                message: "Produto cadastrado com sucesso!",
-            });
-        })
-        .catch((e) => {
-            res.status(400).send({
-                message: "Falha ao cadastrar produto!",
-                data: e,
-            });
+    try {
+        await repository.create(req.body);
+        res.status(201).send({
+            message: "Produto cadastrado com sucesso!",
         });
+    } catch (e) {
+        res.status(500).send({
+            message: "Falha ao processar sua requisição",
+        });
+    }
 };
 
 exports.put = (req, res, next) => {
