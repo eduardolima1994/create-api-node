@@ -10,6 +10,7 @@ mongoose.connect("mongodb://eduardo:eduardo@localhost:27017/admin");
 
 // Carregar os models
 const Product = require('./models/product');
+const Customer = require("./models/customer");
 
 // Carregar rotas
 const indexRoute = require('./routes/index-route');
