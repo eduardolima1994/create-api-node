@@ -83,17 +83,15 @@ exports.put = async(req, res, next) => {
     }
 };
 
-exports.delete = (req, res, next) => {
-    repository.delete(req.body.id)
-        .then(x => {
-            res.status(201).send({
-                message: "Produto removido com sucesso!",
-            });
-        })
-        .catch(e => {
-            res.status(400).send({
-                message: "Falha ao remover produto",
-                data: e,
-            });
+exports.delete = async (req, res, next) => {
+    try {
+        await repository.delete(req.body.id);
+        res.status(201).send({
+            message: "Produto removido com sucesso!",
         });
+    } catch (e) {
+        res.status(500).send({
+            message: "Falha ao processar sua requisição",
+        });
+    }
 };
