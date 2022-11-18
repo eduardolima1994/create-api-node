@@ -70,18 +70,17 @@ exports.post = async (req, res, next) => {
     }
 };
 
-exports.put = (req, res, next) => {
-    repository.update(req.params.id, req.body)
-        .then(x => {
+exports.put = async(req, res, next) => {
+    try {
+        await repository.update(req.params.id, req.body);
         res.status(201).send({
             message: "Produto atualizado com sucesso!",
         });
-    }).catch(e => {
-        res.status(400).send({
-            message: 'Falha ao atualizar produto',
-            data: e
+    } catch (e) {
+        res.status(500).send({
+            message: "Falha ao processar sua requisição",
         });
-    });
+    }
 };
 
 exports.delete = (req, res, next) => {
